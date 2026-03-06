@@ -1,6 +1,20 @@
 import { z } from 'zod'
 import type { Schedule } from '../types'
 
+/** Obsolete category values to replace with "Adulting". */
+const OBSOLETE_LIFE_ADMIN = /^(life\s*[&\-]?\s*admin|life\s*admin|life-admin)$/i
+
+function normalizeCategory(category: string): string {
+  return OBSOLETE_LIFE_ADMIN.test(category.trim()) ? 'Adulting' : category
+}
+
+/** In-place: replace obsolete "Life admin" etc. with "Adulting" in schedule. */
+export function normalizeScheduleCategories(schedule: Schedule): void {
+  for (const b of schedule.weekdayBlocks) {
+    b.category = normalizeCategory(b.category)
+  }
+}
+
 const ScheduleProfileSchema = z.object({
   wakeTime: z.string(),
   sleepTarget: z.string(),
@@ -63,7 +77,9 @@ export function parseScheduleJson(json: string): ScheduleParseResult {
       const msg = result.error.issues.map((e) => `${String(e.path.join('.'))}: ${e.message}`).join('; ')
       return { success: false, error: msg }
     }
-    return { success: true, schedule: result.data as Schedule }
+    const schedule = result.data as Schedule
+    normalizeScheduleCategories(schedule)
+    return { success: true, schedule }
   } catch (e) {
     return { success: false, error: e instanceof Error ? e.message : 'Invalid JSON' }
   }

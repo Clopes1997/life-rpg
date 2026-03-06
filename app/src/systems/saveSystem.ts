@@ -1,6 +1,12 @@
 import type { GameState } from '../types'
+import { normalizeScheduleCategories } from '../utils/scheduleParser'
 
 const STORAGE_KEY = 'life-rpg-save'
+
+function normalizeLoadedState(state: GameState): GameState {
+  if (state.schedule) normalizeScheduleCategories(state.schedule)
+  return state
+}
 
 export function loadGameState(): GameState | null {
   try {
@@ -8,7 +14,7 @@ export function loadGameState(): GameState | null {
     if (!raw) return null
     const parsed = JSON.parse(raw) as GameState
     if (!parsed || typeof parsed.wallet !== 'number') return null
-    return parsed
+    return normalizeLoadedState(parsed)
   } catch {
     return null
   }
@@ -30,7 +36,7 @@ export function importSaveFile(json: string): GameState | null {
   try {
     const parsed = JSON.parse(json) as GameState
     if (!parsed || typeof parsed.wallet !== 'number') return null
-    return parsed
+    return normalizeLoadedState(parsed)
   } catch {
     return null
   }

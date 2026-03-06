@@ -24,7 +24,7 @@
 .category-creative { background: rgba(168, 85, 247, 0.22); color: #c4b5fd; }
 .category-daily { background: rgba(245, 158, 11, 0.15); color: #fcd34d; }
 .category-weekly { background: rgba(236, 72, 153, 0.22); color: #f9a8d4; }
-.category-life-admin { background: rgba(100, 116, 139, 0.25); color: #94a3b8; }
+.category-adulting { background: rgba(100, 116, 139, 0.25); color: #94a3b8; }
 
 @keyframes progress-pulse {
   0%, 100% { opacity: 1; }

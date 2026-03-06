@@ -8,7 +8,7 @@ function getCategoryClass(category: string): string {
   if (k.includes('health') || k.includes('exercise')) return 'category-health'
   if (k.includes('skill') || k.includes('study')) return 'category-skills'
   if (k.includes('creative') || k.includes('music') || k.includes('sing')) return 'category-creative'
-  if (k.includes('admin') || k.includes('life') || k.includes('adulting')) return 'category-life-admin'
+  if (k.includes('adulting')) return 'category-adulting'
   if (k.includes('weekly')) return 'category-weekly'
   return 'category-daily'
 }
