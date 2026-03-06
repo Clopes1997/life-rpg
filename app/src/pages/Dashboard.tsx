@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
-import { saveGameState, exportSaveFile } from '../systems/saveSystem'
+import { saveGameState, exportSaveFile, importSaveFile } from '../systems/saveSystem'
 import { parseScheduleJson } from '../utils/scheduleParser'
 import { QuestBoard } from '../components/QuestBoard'
 import { RewardToast } from '../components/RewardPopup'
@@ -25,6 +25,7 @@ function getTodayLabel() {
 
 export function Dashboard() {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const loadSaveInputRef = useRef<HTMLInputElement>(null)
   const [showWizard, setShowWizard] = useState(false)
   const [lastCompletedQuestId, setLastCompletedQuestId] = useState<string | null>(null)
   const [showEndOfDaySummary, setShowEndOfDaySummary] = useState(false)
@@ -48,6 +49,7 @@ export function Dashboard() {
     completeQuest,
     clearActiveRewardToast,
     getStateForSave,
+    setFromLoadedState,
     generateAndSetQuests,
   } = useGameStore()
 
@@ -68,6 +70,24 @@ export function Dashboard() {
 
   const handleSave = () => {
     saveGameState(getStateForSave())
+  }
+
+  const handleLoadSave = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const text = reader.result as string
+      const loaded = importSaveFile(text)
+      if (loaded) {
+        setFromLoadedState(loaded)
+        saveGameState(loaded)
+      } else {
+        alert('Invalid save file. Ensure it is a valid Life RPG save JSON.')
+      }
+    }
+    reader.readAsText(file)
+    e.target.value = ''
   }
 
   const handleExportSave = () => {
@@ -249,6 +269,13 @@ export function Dashboard() {
               </button>
               <button
                 type="button"
+                onClick={() => loadSaveInputRef.current?.click()}
+                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
+              >
+                Load save
+              </button>
+              <button
+                type="button"
                 onClick={handleExportSave}
                 className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
               >
@@ -285,6 +312,13 @@ export function Dashboard() {
             accept=".json,application/json"
             className="hidden"
             onChange={handleImportSchedule}
+          />
+          <input
+            ref={loadSaveInputRef}
+            type="file"
+            accept=".json,application/json"
+            className="hidden"
+            onChange={handleLoadSave}
           />
           <QuestBoard
             quests={questsToday}

@@ -279,6 +279,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const isPriority = priorities.includes(questId)
 
     const applyRewards = (streakCurrent?: number) => {
+      // Apply coins synchronously so wallet updates immediately (reward popup still buffered).
+      get().addCoins(totalReward, quest.title, 'quest')
+      if (phaseCleared && windowLabel) {
+        get().addCoins(PHASE_CLEARED_BONUS, `${windowLabel} cleared`, 'quest')
+      }
+      const gotLucky = Math.random() < LUCKY_DROP_CHANCE
+      if (gotLucky) {
+        get().addCoins(LUCKY_DROP_COINS, 'Lucky Drop!', 'random')
+      }
       recordQuestReward(quest.title, totalReward, () => ({
         addCoins: get().addCoins,
         addRewardToToast: get().addRewardToToast,
@@ -289,7 +298,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
           addRewardToToast: get().addRewardToToast,
         }))
       }
-      if (Math.random() < LUCKY_DROP_CHANCE) {
+      if (gotLucky) {
         recordQuestReward('Lucky Drop!', LUCKY_DROP_COINS, () => ({
           addCoins: get().addCoins,
           addRewardToToast: get().addRewardToToast,

@@ -24,13 +24,15 @@ export interface RewardStoreApi {
 let buffer: BufferedReward[] = []
 let flushTimer: ReturnType<typeof setTimeout> | null = null
 
+/**
+ * Flush only updates the reward toast (popup). Coin updates are applied synchronously
+ * in the store when completing quests so the wallet is correct immediately.
+ */
 function flush(getStore: () => RewardStoreApi): void {
   if (buffer.length === 0) return
   const total = buffer.reduce((sum, r) => sum + r.amount, 0)
   const labels = buffer.map((r) => r.label)
-  const label = labels.length === 1 ? labels[0]! : labels.join(', ')
   const store = getStore()
-  store.addCoins(total, label, 'quest')
   store.addRewardToToast(total, labels)
   buffer = []
   if (flushTimer != null) {

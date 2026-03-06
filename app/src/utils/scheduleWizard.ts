@@ -31,14 +31,23 @@ function parseCommaList(raw: string): string[] {
   return raw.split(',').map((s) => s.trim()).filter(Boolean)
 }
 
+/** Default duration for blocks when not specified (hours). */
+const DEFAULT_DURATION_HOURS = 1
+/** Default time of day when not specified. */
+const DEFAULT_TIME_OF_DAY = 'flexible' as const
+
 /**
  * Build a valid Schedule from wizard answers. Used when user is brand new and creates schedule via wizard.
+ * Supports full schema: profile, priorities, weekdayBlocks (with timeOfDay and configurable duration),
+ * weeklyEvents, weekendRules, minimumDay.
  */
 export function buildScheduleFromWizardAnswers(answers: ScheduleWizardAnswers): Schedule {
   const priorities = parseCommaList(answers.prioritiesRaw)
   const studySkills = parseCommaList(answers.studySkillsRaw)
   const blockIds = new Set<string>()
   const weekdayBlocks: WeekdayBlock[] = []
+  const durationHours = Math.max(0.25, answers.defaultDurationHours ?? DEFAULT_DURATION_HOURS)
+  const timeOfDay = answers.defaultTimeOfDay ?? DEFAULT_TIME_OF_DAY
 
   for (const p of priorities) {
     const id = toId(p) || 'priority'
@@ -48,9 +57,10 @@ export function buildScheduleFromWizardAnswers(answers: ScheduleWizardAnswers): 
       id,
       title: toTitle(id),
       category: defaultCategory(id),
-      duration: 1,
+      duration: durationHours,
       coinReward: 25,
       repeatable: true,
+      timeOfDay,
     })
   }
 
@@ -65,6 +75,7 @@ export function buildScheduleFromWizardAnswers(answers: ScheduleWizardAnswers): 
         duration: Math.max(0.25, answers.exerciseMinutes / 60),
         coinReward: 20,
         repeatable: false,
+        timeOfDay,
       })
     }
   }
@@ -77,9 +88,10 @@ export function buildScheduleFromWizardAnswers(answers: ScheduleWizardAnswers): 
       id,
       title: toTitle(id),
       category: 'Skills',
-      duration: 1,
+      duration: durationHours,
       coinReward: 25,
       repeatable: true,
+      timeOfDay,
     })
   }
 
@@ -93,7 +105,8 @@ export function buildScheduleFromWizardAnswers(answers: ScheduleWizardAnswers): 
     title: e.title.trim() || `Weekly ${i + 1}`,
     day: e.day,
     duration: e.durationHours,
-    coinReward: 25,
+    coinReward: typeof e.coinReward === 'number' ? e.coinReward : 25,
+    timeOfDay: answers.defaultTimeOfDay ?? undefined,
   }))
 
   const minimumHabits = priorityIds.slice(0, 3)
