@@ -68,10 +68,6 @@ export function Dashboard() {
     return () => clearTimeout(t)
   }, [lastCompletedQuestId])
 
-  const handleSave = () => {
-    saveGameState(getStateForSave())
-  }
-
   const handleLoadSave = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -251,7 +247,7 @@ export function Dashboard() {
 
       {schedule && dayStarted && (
         <>
-          <Accordion title="Actions" summary="Schedule, save, export" defaultOpen={false}>
+          <Accordion title="Actions" summary="Schedule, export, end day" defaultOpen={false}>
             <div className="pt-3 flex flex-wrap items-center gap-2">
               <button
                 type="button"
@@ -259,13 +255,6 @@ export function Dashboard() {
                 className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text)] hover:opacity-85"
               >
                 Change schedule
-              </button>
-              <button
-                type="button"
-                onClick={handleSave}
-                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
-              >
-                Save progress
               </button>
               <button
                 type="button"
