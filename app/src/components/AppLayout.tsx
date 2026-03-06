@@ -74,17 +74,19 @@ export function AppLayout({ children, activeTab, onTabChange }: AppLayoutProps) 
             <span className="text-base" aria-hidden>🔥</span>
             <span>{streak.current} day streak</span>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              clearGameState()
-              window.location.reload()
-            }}
-            className="rounded-lg border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--text-muted)]"
-            title="Clear saved data and reload (temporary)"
-          >
-            Clear cache
-          </button>
+          {import.meta.env.DEV && (
+            <button
+              type="button"
+              onClick={() => {
+                clearGameState()
+                window.location.reload()
+              }}
+              className="rounded-lg border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--text-muted)]"
+              title="Clear saved data and reload (temporary)"
+            >
+              Clear cache
+            </button>
+          )}
         </div>
       </header>
       <main className="flex flex-col gap-8">
