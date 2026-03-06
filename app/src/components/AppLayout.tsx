@@ -91,36 +91,36 @@ export function AppLayout({ children, activeTab, onTabChange }: AppLayoutProps) 
 
   return (
     <div className="max-w-[1100px] mx-auto flex flex-col gap-4 lg:gap-8 w-full min-w-0">
-      <header className="flex flex-wrap items-center justify-between gap-3 lg:gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 lg:p-5">
-        <div className="flex items-center gap-3 lg:gap-4 min-w-0 flex-1">
-          <div className="text-[22px] font-extrabold tracking-tight shrink-0">
+      <header className="flex flex-wrap items-center gap-3 lg:gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 lg:p-5">
+        <div className="flex items-center gap-3 lg:gap-4">
+          <div className="text-[22px] font-extrabold tracking-tight">
             ⚔️ Life <span className="text-[var(--accent)]">RPG</span>
           </div>
           <NavTabs
             tabs={TABS}
             activeTab={activeTab}
             onTabChange={onTabChange}
-            className="hidden md:flex gap-1"
+            className="hidden lg:flex gap-1"
           />
           <button
             type="button"
             onClick={() => setMenuOpen((o) => !o)}
-            className="md:hidden rounded-lg p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-raised)]"
+            className="lg:hidden rounded-lg p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-raised)]"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-        <div className="flex items-center gap-3 lg:gap-5 flex-wrap">
+        <div className="header-badge-group flex items-center gap-3 lg:gap-5 flex-wrap">
           <WalletDisplay coins={wallet} />
           {lastPurchase && (
-            <div className="text-xs text-[var(--text-muted)] hidden sm:block truncate max-w-[180px] md:max-w-none">
+            <div className="text-xs text-[var(--text-muted)] hidden sm:block truncate max-w-[180px] lg:max-w-none">
               Last reward: <span className="text-[var(--text)] font-medium truncate">{lastPurchase.label}</span>
               {' – '}{formatLastRewardDate(lastPurchase.timestamp)}
             </div>
           )}
-          <div className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-raised)] px-4 py-2 text-sm font-semibold shrink-0">
+          <div className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-raised)] px-4 py-2 text-sm font-semibold">
             <span className="text-base" aria-hidden>🔥</span>
             <span>{streak.current} day streak</span>
           </div>
@@ -142,7 +142,7 @@ export function AppLayout({ children, activeTab, onTabChange }: AppLayoutProps) 
 
       {menuOpen && (
         <div
-          className="md:hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden"
+          className="lg:hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden"
           role="dialog"
           aria-label="Main navigation"
         >

@@ -90,6 +90,16 @@
   animation: day-complete-reveal 1.2s ease-out forwards;
 }
 
+/* Header: badge group right when one row, left when wrapped to second row */
+.header-badge-group {
+  margin-left: auto;
+}
+@media (max-width: 609px) {
+  .header-badge-group {
+    margin-left: 0;
+  }
+}
+
 body {
   margin: 0;
   background: var(--bg);
