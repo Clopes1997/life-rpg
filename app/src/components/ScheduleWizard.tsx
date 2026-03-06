@@ -106,7 +106,7 @@ export function ScheduleWizard({ onComplete, onCancel }: ScheduleWizardProps) {
   // —— Step 1: Profile ——
   if (step === 1) {
     return (
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 min-w-0">
         <p className="text-xs text-[var(--text-muted)] mb-2">{stepLabel}</p>
         <h2 className="text-lg font-bold mb-4">Create your schedule</h2>
         <p className="text-sm text-[var(--text-muted)] mb-6">Set your day boundaries. You can change these later.</p>
@@ -147,7 +147,7 @@ export function ScheduleWizard({ onComplete, onCancel }: ScheduleWizardProps) {
   // —— Step 2: Daily quests (per-quest time + duration) ——
   if (step === 2) {
     return (
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 min-w-0">
         <p className="text-xs text-[var(--text-muted)] mb-2">{stepLabel}</p>
         <h2 className="text-lg font-bold mb-4">Daily quests</h2>
         <p className="text-sm text-[var(--text-muted)] mb-4">
@@ -234,7 +234,7 @@ export function ScheduleWizard({ onComplete, onCancel }: ScheduleWizardProps) {
   if (step === 3) {
     const blockIds = validBlocks.map((b) => toId(b.title)).filter(Boolean)
     return (
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 min-w-0">
         <p className="text-xs text-[var(--text-muted)] mb-2">{stepLabel}</p>
         <h2 className="text-lg font-bold mb-4">Streak priorities</h2>
         <p className="text-sm text-[var(--text-muted)] mb-4">
@@ -273,7 +273,7 @@ export function ScheduleWizard({ onComplete, onCancel }: ScheduleWizardProps) {
   // —— Step 4: Weekly events ——
   if (step === 4) {
     return (
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 min-w-0">
         <p className="text-xs text-[var(--text-muted)] mb-2">{stepLabel}</p>
         <h2 className="text-lg font-bold mb-4">Weekly events</h2>
         <p className="text-sm text-[var(--text-muted)] mb-4">Any events on fixed days? (e.g. voice acting lesson, therapy). Optional.</p>
@@ -362,7 +362,7 @@ export function ScheduleWizard({ onComplete, onCancel }: ScheduleWizardProps) {
 
   // —— Step 5: Done — download + use ——
   return (
-    <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+    <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 min-w-0">
       <p className="text-xs text-[var(--text-muted)] mb-2">{stepLabel}</p>
       <h2 className="text-lg font-bold mb-2">Your schedule is ready</h2>
       <p className="text-sm text-[var(--text-muted)] mb-4">

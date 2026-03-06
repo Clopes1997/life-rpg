@@ -139,18 +139,18 @@ export function QuestBoard({
   }
 
   return (
-    <section className="flex flex-col gap-8">
+    <section className="flex flex-col gap-4 lg:gap-8">
       {hasTimeAnchors && bounds && wakeTimeToday && (
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-raised)] px-4 py-3 text-sm text-[var(--text-muted)]">
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-raised)] px-3 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-[var(--text-muted)] flex flex-wrap gap-x-1 gap-y-0.5 items-baseline">
           <span className="font-medium text-[var(--text)]">Today</span>
-          <span className="mx-2">·</span>
+          <span className="hidden sm:inline">·</span>
           <span>Wake {wakeTimeToday}</span>
-          <span className="mx-2">·</span>
-          <span>Morning ends {formatMinutesToTime(bounds.morningEnd)}</span>
-          <span className="mx-2">·</span>
-          <span>Afternoon ends {formatMinutesToTime(bounds.afternoonEnd)}</span>
-          <span className="mx-2">·</span>
-          <span>Evening ends {formatMinutesToTime(bounds.eveningEnd)}</span>
+          <span className="hidden sm:inline">·</span>
+          <span className="whitespace-nowrap">Morning → {formatMinutesToTime(bounds.morningEnd)}</span>
+          <span className="hidden sm:inline">·</span>
+          <span className="whitespace-nowrap">Afternoon → {formatMinutesToTime(bounds.afternoonEnd)}</span>
+          <span className="hidden sm:inline">·</span>
+          <span className="whitespace-nowrap">Evening → {formatMinutesToTime(bounds.eveningEnd)}</span>
         </div>
       )}
 
@@ -162,7 +162,7 @@ export function QuestBoard({
             tabIndex={-1}
             role="alert"
             aria-live="polite"
-            className="day-complete-banner-reveal rounded-xl border border-[var(--green)]/50 bg-[var(--green)]/10 px-5 py-4 text-center outline-none focus:ring-2 focus:ring-[var(--green)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]"
+            className="day-complete-banner-reveal rounded-xl border border-[var(--green)]/50 bg-[var(--green)]/10 px-4 md:px-5 py-4 text-center outline-none focus:ring-2 focus:ring-[var(--green)] focus:ring-offset-2 focus:ring-offset-[var(--bg)] min-w-0"
           >
             <p className="text-lg font-bold text-[var(--green)]">🎉 Day complete!</p>
             <p className="text-sm text-[var(--text-muted)] mt-1">You finished all {quests.length} quests. Great work.</p>
@@ -219,7 +219,7 @@ export function QuestBoard({
               
             </button>
             {!isCollapsed && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mt-2">
                 {list.map((quest) => {
                   const status: QuestStatus =
                     !quest.completed && expired

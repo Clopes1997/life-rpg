@@ -46,19 +46,19 @@ export function StoreItemCard({ item, userCoins, onPurchaseClick }: StoreItemCar
   return (
     <div
       className={clsx(
-        'flex flex-col gap-3 rounded-xl border p-5 transition-shadow',
+        'flex flex-col gap-3 rounded-xl border p-4 md:p-5 transition-shadow min-w-0',
         affordableAndReady
           ? 'border-[var(--accent)]/50 bg-[var(--surface)] shadow-[0_0_20px_rgba(245,158,11,0.15)]'
           : 'border-[var(--border)] bg-[var(--surface)]'
       )}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-4 min-w-0">
         <span className="text-4xl shrink-0" aria-hidden>
           {icon}
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-bold text-[var(--text)]">{item.title}</span>
+            <span className="font-bold text-[var(--text)] break-words">{item.title}</span>
             <span
               className={clsx(
                 'rounded border px-2 py-0.5 text-[10px] font-semibold uppercase',
@@ -100,7 +100,7 @@ export function StoreItemCard({ item, userCoins, onPurchaseClick }: StoreItemCar
         type="button"
         disabled={disabled}
         onClick={() => onPurchaseClick(item)}
-        className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+        className="rounded-lg bg-[var(--accent)] px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold text-black disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
       >
         Purchase
       </button>

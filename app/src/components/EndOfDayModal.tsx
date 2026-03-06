@@ -17,14 +17,14 @@ export function EndOfDayModal({
 }: EndOfDayModalProps) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 overflow-y-auto"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="end-of-day-title"
     >
       <div
-        className="rounded-xl border border-[var(--green)]/50 bg-[var(--surface)] p-6 w-full max-w-md shadow-xl"
+        className="rounded-xl border border-[var(--green)]/50 bg-[var(--surface)] p-4 md:p-6 w-full max-w-md shadow-xl my-auto max-h-[calc(100vh-2rem)] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="end-of-day-title" className="text-xl font-bold text-[var(--green)] mb-1">

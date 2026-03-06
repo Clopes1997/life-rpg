@@ -55,7 +55,7 @@ export function RewardToast({
       onClick={onDismiss}
     >
       <Coins size={20} className="text-[var(--accent)] shrink-0" aria-hidden />
-      <div className="flex flex-col gap-0.5 min-w-0">
+      <div className="flex flex-col gap-0.5 min-w-0 flex-1 overflow-hidden">
         <span className="font-semibold text-[var(--accent)]">
           +{totalCoins} coins
         </span>

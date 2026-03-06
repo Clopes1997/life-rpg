@@ -70,7 +70,7 @@ export function StorePage() {
 
   return (
     <>
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-5">
         <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
           <span aria-hidden>🛒</span>
           Reward Shop
@@ -98,16 +98,16 @@ export function StorePage() {
           </div>
         )}
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           {categoryOrder.map((cat) => {
             const items = grouped.get(cat)
             if (!items?.length) return null
             return (
-              <div key={cat}>
+              <div key={cat} className="min-w-0">
                 <h3 className="text-base font-bold text-[var(--text)] mb-3">
                   {getCategoryLabel(cat)}
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                   {items.map((item) => (
                     <StoreItemCard
                       key={item.id}
@@ -124,7 +124,7 @@ export function StorePage() {
           {customReward ? (
             <div>
               <h3 className="text-base font-bold text-[var(--text)] mb-3">Custom</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                 <StoreItemCard
                   key="custom"
                   item={customReward}
@@ -144,20 +144,20 @@ export function StorePage() {
               </button>
             </div>
           ) : (
-            <div className="rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface-raised)]/50 p-5">
+            <div className="rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface-raised)]/50 p-4 md:p-5">
               <h3 className="text-base font-bold text-[var(--text)] mb-3">Custom reward</h3>
               <p className="text-sm text-[var(--text-muted)] mb-4">
                 Create one reward with your own name, cost, and cooldown.
               </p>
               <div className="flex flex-wrap gap-3 items-end">
-                <label className="flex flex-col gap-1">
+                <label className="flex flex-col gap-1 min-w-0 flex-1 sm:flex-initial">
                   <span className="text-xs text-[var(--text-muted)]">Title</span>
                   <input
                     type="text"
                     value={customTitle}
                     onChange={(e) => setCustomTitle(e.target.value)}
                     placeholder="e.g. Coffee break"
-                    className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] w-40"
+                    className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] w-full sm:w-40 min-w-0"
                   />
                 </label>
                 <label className="flex flex-col gap-1">
@@ -222,7 +222,7 @@ export function StorePage() {
       })()}
 
       <div
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4 box-border pointer-events-none"
+        className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4 box-border pointer-events-none"
         aria-hidden={!purchaseToast}
       >
         {purchaseToast && (

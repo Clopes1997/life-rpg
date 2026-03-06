@@ -43,15 +43,15 @@ export function QuestCard({ quest, onProgress, onComplete, justCompleted, window
   return (
     <div
       className={clsx(
-        'flex flex-col gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-colors',
+        'flex flex-col gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-5 transition-colors min-w-0',
         'hover:border-[var(--accent)]',
         quest.completed && 'border-[var(--green)]/40',
         isMissed && 'opacity-60 border-[var(--text-muted)]/30'
       )}
     >
-      <div className="flex justify-between items-start">
-        <div>
-          <div className="font-bold text-base">{quest.title}</div>
+      <div className="flex justify-between items-start gap-2 min-w-0">
+        <div className="min-w-0 flex-1">
+          <div className="font-bold text-base truncate" title={quest.title}>{quest.title}</div>
           <div className="flex flex-wrap items-center gap-2 mt-1">
             <span className={clsx('inline-block text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded', getCategoryClass(quest.category))}>
               {quest.category}
@@ -102,12 +102,12 @@ export function QuestCard({ quest, onProgress, onComplete, justCompleted, window
           ? 'Done'
           : `${quest.progressCurrent} / ${quest.progressRequired}`}
       </div>
-      <div className="flex gap-2 mt-auto">
+      <div className="flex gap-2 mt-auto flex-wrap">
         {!quest.completed && (
           <button
             type="button"
             onClick={onProgress}
-            className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text)] hover:opacity-85"
+            className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold text-[var(--text)] hover:opacity-85"
           >
             + Progress
           </button>
@@ -117,7 +117,7 @@ export function QuestCard({ quest, onProgress, onComplete, justCompleted, window
           onClick={onComplete}
           disabled={!canComplete}
           className={clsx(
-            'rounded-lg px-4 py-2 text-sm font-semibold',
+            'rounded-lg px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold',
             canComplete
               ? 'bg-[var(--accent)] text-black hover:opacity-90'
               : 'bg-[var(--surface-raised)] text-[var(--text-muted)] cursor-not-allowed opacity-60'

@@ -17,7 +17,7 @@ export function HistoryPage() {
   const purchases = rewardHistory.filter((r) => r.type === 'shop')
 
   return (
-    <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
+    <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-5 min-w-0">
       <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
         <span aria-hidden>📜</span>
         Purchase history
@@ -31,7 +31,7 @@ export function HistoryPage() {
           {purchases.map((r) => (
             <li
               key={r.id}
-              className="flex items-center justify-between gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-raised)] px-4 py-3"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-raised)] px-4 py-3 min-w-0"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <Coins size={18} className="text-[var(--accent)] shrink-0" aria-hidden />

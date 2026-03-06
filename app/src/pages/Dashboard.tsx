@@ -142,7 +142,7 @@ export function Dashboard() {
     .sort((a, b) => a.cost - b.cost)[0]
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4 lg:gap-8 min-w-0">
       {schedule && (
         <Accordion
           title={getTodayLabel()}
@@ -174,7 +174,7 @@ export function Dashboard() {
       )}
 
       <div
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4 box-border pointer-events-none"
+        className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4 box-border pointer-events-none"
         aria-hidden={!activeRewardToast}
       >
         {activeRewardToast && (
@@ -188,7 +188,7 @@ export function Dashboard() {
       </div>
 
       {!schedule && !showWizard && (
-        <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 text-center">
+        <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-6 text-center">
           <p className="text-[var(--text-muted)] mb-4">Import your schedule JSON or create one with the wizard.</p>
           <input
             ref={fileInputRef}
@@ -201,14 +201,14 @@ export function Dashboard() {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text)] hover:opacity-85"
+              className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold text-[var(--text)] hover:opacity-85"
             >
               Import schedule JSON
             </button>
             <button
               type="button"
               onClick={() => setShowWizard(true)}
-              className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+              className="rounded-lg bg-[var(--accent)] px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold text-black hover:opacity-90"
             >
               Create with wizard
             </button>
@@ -224,7 +224,7 @@ export function Dashboard() {
       )}
 
       {schedule && !dayStarted && (
-        <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center max-w-md mx-auto">
+        <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 md:p-8 text-center max-w-md mx-auto w-full min-w-0">
           <h2 className="text-xl font-bold mb-2">Good morning.</h2>
           <p className="text-sm text-[var(--text-muted)] mb-4">When did you wake up today?</p>
           <input
@@ -237,7 +237,7 @@ export function Dashboard() {
             <button
               type="button"
               onClick={handleStartDay}
-              className="rounded-lg bg-[var(--accent)] px-6 py-3 text-base font-semibold text-black hover:opacity-90"
+              className="rounded-lg bg-[var(--accent)] px-6 py-3 min-h-[44px] text-base font-semibold text-black hover:opacity-90"
             >
               Start Day
             </button>
@@ -252,28 +252,28 @@ export function Dashboard() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text)] hover:opacity-85"
+                className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-semibold text-[var(--text)] hover:opacity-85"
               >
                 Change schedule
               </button>
               <button
                 type="button"
                 onClick={() => loadSaveInputRef.current?.click()}
-                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
+                className="rounded-lg border border-[var(--border)] px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
               >
                 Load save
               </button>
               <button
                 type="button"
                 onClick={handleExportSave}
-                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
+                className="rounded-lg border border-[var(--border)] px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
               >
                 Export save
               </button>
               <button
                 type="button"
                 onClick={() => setShowEndOfDaySummary(true)}
-                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
+                className="rounded-lg border border-[var(--border)] px-4 py-2.5 min-h-[44px] md:min-h-0 text-sm font-medium text-[var(--text)] hover:bg-[var(--surface-raised)]"
               >
                 End day
               </button>

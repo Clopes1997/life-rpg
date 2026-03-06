@@ -48,7 +48,7 @@ function App() {
     )
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] p-6">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] p-4 lg:p-6 overflow-x-hidden min-w-0">
       <AppLayout activeTab={activeTab} onTabChange={setActiveTab}>
         {tabContent}
       </AppLayout>
