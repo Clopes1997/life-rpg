@@ -53,7 +53,7 @@ export function QuestBoard({
 }: QuestBoardProps) {
   const { rewardHistory, streak } = useGameStore()
   const today = getTodayISO()
-  const [tick, setTick] = useState(0)
+  const [, setTick] = useState(0)
   useEffect(() => {
     const id = setInterval(() => setTick((t) => t + 1), COUNTDOWN_TICK_MS)
     return () => clearInterval(id)
